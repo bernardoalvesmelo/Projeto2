@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="pt">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="./styles.css" />
+  <title>Document</title>
+</head>
+
+<body>
+  <main>
+    <div id="overlay" class="overlay">
+      <div class="modal">
+        <input id="input-text" type="text" placeholder="Título" />
+        <input id="input-description" type="text" placeholder="Descrição" />
+        <input id="input-date" type="date" placeholder="Data" />
+        <select id="select-equipment"></select>
+        <p id="error-message"></p>
+        <button id="ok-button">Finalizar</button>
+        <button id="close-button" class="close">Cancelar</button>
+      </div>
+    </div>
+    <div class="container">
+      <div class="titles">
+        <h1>Chamados</h1>
+        <p>-</p>
+        <a href="../Equipamentos/index.html">Equipamentos</a>
+      </div>
+      <header>
+        <input id="search" class="search" type="text" placeholder="Pesquisar..." />
+        <div class="button-div">
+          <button id="create-item-button">+</button>
+          <label for="create-item-button">Criar Chamado</label>
+        </div>
+      </header>
+      <div id="items-container" class="items-container">
+
+      </div>
+    </div>
+  </main>
+  <script src="https://cdn.jsdelivr.net/npm/dompurify@3.0.0/dist/purify.min.js"></script>
+  <script src="./index.js"></script>
+</body>
+
+</html>

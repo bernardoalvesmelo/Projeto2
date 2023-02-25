@@ -1,0 +1,7 @@
+{
+    "database": "equipamentos_bd",
+    "user": "postgres",
+    "host": "127.0.0.1",
+    "password": "",
+    "port": "5432"
+}

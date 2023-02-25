@@ -1,0 +1,22 @@
+CREATE TABLE Equipamentos
+(
+    id serial NOT NULL,
+    nome VARCHAR(255) NOT NULL,
+    preco_aquisicao float8 NOT NULL,
+    numero_serie bigint NOT NULL,
+    data_fabricacao VARCHAR(255) NOT NULL,
+    fabricante VARCHAR(255) NOT NULL,
+    PRIMARY KEY (id)
+);
+
+
+CREATE TABLE Chamados
+(
+    id serial NOT NULL,
+    titulo VARCHAR(255) NOT NULL,
+    descricao VARCHAR(255) NOT NULL,
+    data_abertura VARCHAR(255) NOT NULL,
+    Equipamentos_id integer NOT NULL,
+    PRIMARY KEY (id),
+    FOREIGN KEY (Equipamentos_id) REFERENCES Equipamentos (id)
+);
