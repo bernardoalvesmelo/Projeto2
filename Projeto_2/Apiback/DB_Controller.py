@@ -9,6 +9,7 @@ class DBController:
     def connect_db(self, database):
         db_config = self.db_config
         db_config["database"] = database
+        self.database = database
         self.connection = None
         try:
             self.connection = psycopg2.connect(
@@ -23,10 +24,9 @@ class DBController:
             self.connection.autocommit = True
             self.cursor = self.connection.cursor()
 
-    def connection_db(self):
+    def connection_db(self, name):
         db_config = self.db_config
-        db_config["database"] = database
-        self.connection = None
+        db_config["database"] = name
         try:
             self.connection = psycopg2.connect(
                 user=db_config["user"], password=db_config["password"], host=db_config["host"],
@@ -42,7 +42,7 @@ class DBController:
 
     def create_db(self, name):
         name = name.lower()
-        self.connection_db()
+        self.connection_db(name)
         cursor = self.cursor
 
         cursor.execute("SELECT datname FROM pg_database;")
