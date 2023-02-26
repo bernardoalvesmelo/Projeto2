@@ -166,7 +166,7 @@ function editButtonClick(id) {
     inputText.value = chamado.titulo;
     inputDate.value = chamado.data_abertura;
     inputDescription.value = chamado.descricao;
-    selectEquip.value = equipamentos.find(equipment => equipment.id === chamado.Equipamentos_id).id;
+    selectEquip.value = chamado.Equipamentos_id;
     overlay.style.display = "flex";
 }
 
