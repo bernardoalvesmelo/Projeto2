@@ -162,11 +162,11 @@ function editButtonClick(id) {
     currentId = id;
     action = "update";
     let chamado = chamadoList.find(chamado => chamado.id === id);
+    optionsEquips();
     inputText.value = chamado.titulo;
     inputDate.value = chamado.data_abertura;
     inputDescription.value = chamado.descricao;
     selectEquip.value = equipamentos.find(equipment => equipment.id === chamado.Equipamentos_id).id;
-    optionsEquips();
     overlay.style.display = "flex";
 }
 
