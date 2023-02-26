@@ -108,7 +108,7 @@ def CHAMREMOVE(id):
         return jsonify("Header inválido")
     id = int(id)
     if db_controller.remove_chamado(id):
-        return jsonify("Chmado removido")
+        return jsonify("Chamado removido")
     else:
         return jsonify("Chamado não removido")
 
