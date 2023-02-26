@@ -5,4 +5,4 @@ não precisa alterar nome da database.
 para rodar o programa, além de ser necessário importar as bibliotecas respectivas.
 
 É necessário usar um ambiente virtual, caso haja alguma incoveniência com o ambiente
-disponibilizado, pode criar um novo através do comando: python - m venv env
+disponibilizado, pode criar um novo através do comando: python -m venv env
