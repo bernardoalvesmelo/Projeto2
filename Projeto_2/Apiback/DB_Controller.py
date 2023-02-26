@@ -60,7 +60,7 @@ class DBController:
             try:
                 cursor.execute(sql)
                 print("Database criação sucedida........")
-                print('Done')
+                print('Completado')
                 return True
             except:
                 print("Database criação falha........")
@@ -74,7 +74,7 @@ class DBController:
             print("Tabelas criadas........")
 
         except:
-            print("Tables não criadas........")
+            print("Tabelas não criadas........")
 
         print('Done')
 
