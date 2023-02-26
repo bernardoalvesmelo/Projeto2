@@ -1,6 +1,6 @@
 import psycopg2
 import json
-
+from pathlib import Path
 
 class DBController:
     def __init__(self):
@@ -314,12 +314,14 @@ class DBController:
             return obj
 
     def load_confing(self):
-        file = open("db_config.txt", "r")
+        filepath = Path(__file__).parent / "db_config.txt"
+        file = open(filepath, "r")
         db_config_string = file.read().strip()
         db_config = json.loads(db_config_string)
         return db_config
 
     def load_db_script(self):
-        file = open("db_script.txt", "r")
+        filepath = Path(__file__).parent / "db_script.txt"
+        file = open(filepath, "r")
         db_script = file.read().strip()
         return db_script
