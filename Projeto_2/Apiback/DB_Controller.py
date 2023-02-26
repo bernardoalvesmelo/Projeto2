@@ -25,6 +25,7 @@ class DBController:
 
     def connection_db(self):
         db_config = self.db_config
+        db_config["database"] = database
         self.connection = None
         try:
             self.connection = psycopg2.connect(
