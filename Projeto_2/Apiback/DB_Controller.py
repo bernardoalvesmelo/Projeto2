@@ -134,12 +134,10 @@ class DBController:
                f''' WHERE id = {id};''')
         try:
             self.cursor.execute(sql)
-            list = self.cursor.fetchall()
+            list = self.cursor.fetchone()
             list_string = []
-            string = f'{list}'
-            size = len(string)
-            string = string[2:size-2]
-            list_string = string.split(",")
+            for item in list:
+                list_string.append(f"{item}")
             print("Select realizado........")
             return list_string
 
@@ -154,11 +152,10 @@ class DBController:
             list_select = self.cursor.fetchall()
             list_string = []
             for list in list_select:
-                string = f'{list}'
-                size = len(string)
-                string = string[1:size-1]
-
-                list_string.append(string)
+                objList = []
+                for item in list:
+                    objList.append(f"{item}")
+                list_string.append(objList)
             print("Select realizado........")
             return list_string
 
@@ -169,16 +166,14 @@ class DBController:
         list_equipamento = self.select_all_equipamento()
         list_obj = []
         try:
-            for list in list_equipamento:
-                equipamento = list.split(",")
-                equipamento = self.select_formating(equipamento)
+            for equipamento in list_equipamento:
                 obj = {}
-                obj["id"] = equipamento[0].strip()
-                obj["nome"] = equipamento[1].strip()
-                obj["preco_aquisicao"] = equipamento[2].strip()
-                obj["numero_serie"] = equipamento[3].strip()
-                obj["data_fabricacao"] = equipamento[4].strip()
-                obj["fabricante"] = equipamento[5].strip()
+                obj["id"] = equipamento[0]
+                obj["nome"] = equipamento[1]
+                obj["preco_aquisicao"] = equipamento[2]
+                obj["numero_serie"] = equipamento[3]
+                obj["data_fabricacao"] = equipamento[4]
+                obj["fabricante"] = equipamento[5]
                 list_obj.append(obj)
             return list_obj
 
@@ -190,7 +185,6 @@ class DBController:
         obj = {}
         try:
             equipamento = self.select_equipamento(id)
-            equipamento = self.select_formating(equipamento)
             obj["id"] = equipamento[0]
             obj["nome"] = equipamento[1]
             obj["preco_aquisicao"] = equipamento[2]
@@ -257,12 +251,10 @@ class DBController:
                f''' WHERE id = {id};''')
         try:
             self.cursor.execute(sql)
-            list = self.cursor.fetchall()
+            list = self.cursor.fetchone()
             list_string = []
-            string = f'{list}'
-            size = len(string)
-            string = string[2:size-2]
-            list_string = string.split(",")
+            for item in list:
+                list_string.append(f"{item}")
             print("Select realizado........")
             return list_string
 
@@ -277,11 +269,10 @@ class DBController:
             list_select = self.cursor.fetchall()
             list_string = []
             for list in list_select:
-                string = f'{list}'
-                size = len(string)
-                string = string[1:size-1]
-
-                list_string.append(string)
+                objList = []
+                for item in list:
+                    objList.append(f"{item}")
+                list_string.append(objList)
             print("Select realizado........")
             return list_string
 
@@ -293,8 +284,7 @@ class DBController:
         list_obj = []
         try:
             for list in list_chamados:
-                chamado = list.split(",")
-                chamado = self.select_formating(chamado)
+                chamado = list
                 obj = {}
                 obj["id"] = chamado[0]
                 obj["titulo"] = chamado[1]
@@ -312,7 +302,6 @@ class DBController:
         try:
             obj = {}
             chamado = self.select_chamado(id)
-            chamado = self.select_formating(chamado)
             obj["id"] = chamado[0]
             obj["titulo"] = chamado[1]
             obj["descricao"] = chamado[2]
@@ -322,15 +311,6 @@ class DBController:
         except:
             print("Falha em retornar o objeto selecionado...")
             return obj
-
-    def select_formating(self, list):
-        formated_list = []
-        for item in list:
-            item = item.strip()
-            if item[0] == "'":
-                item = item[1:-1]
-            formated_list.append(item)
-        return formated_list
 
     def load_confing(self):
         file = open("db_config.txt", "r")
