@@ -9,8 +9,19 @@
   <title>Document</title>
 </head>
 
-<body>
+<body onload="loginState()">
   <main>
+    <div id="login-form" class="overlay">
+      <div class="modal">
+        <form id="login-forms">
+          <label for="username">Usuário:</label>
+          <input type="text" id="username" name="username" required>
+          <label for="password">Senha:</label>
+          <input type="password" id="password" name="password" required>
+          <button type="submit">Log In</button>
+        </form>
+      </div>
+    </div>
     <div id="overlay" class="overlay">
       <div class="modal">
         <input id="input-text" type="text" placeholder="Nome" />
@@ -22,6 +33,9 @@
         <button id="ok-button">Finalizar</button>
         <button id="close-button" class="close">Cancelar</button>
       </div>
+    </div>
+    <div class="logout-div">
+      <button class="logout-item-button" id="logout-item-button">Logout</button>
     </div>
     <div class="container">
       <div class="titles">

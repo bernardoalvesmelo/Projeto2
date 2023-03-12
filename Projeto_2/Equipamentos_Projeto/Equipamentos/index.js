@@ -22,8 +22,6 @@ const searchBar = document.getElementById("search");
 
 const createEquipmentButton = document.getElementById("create-item-button");
 
-startlist();
-
 createEquipmentButton.addEventListener("click", () => {
     action = "insert";
     overlay.style.display = "flex";
@@ -172,11 +170,15 @@ function removeButtonClick(id) {
 
 function getJson(header, executable) {
     try {
-        fetch(route + header)
+        fetch(route + header, {
+            method: 'GET',
+            credentials: 'include'
+        })
             .then(response => response.json())
             .then(data => {
                 try {
                     if (data) {
+                        console.log(data);
                         executable(data);
                     }
                 } catch (error) {
@@ -199,7 +201,8 @@ function postJson(header, object, executable) {
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify(object)
+            body: JSON.stringify(object),
+            credentials: 'include'
         })
             .then(response => response.json())
             .then(data => {
@@ -220,4 +223,86 @@ function startlist() {
         updateEquipmentShowed();
     }
     getJson("equipamentos", executable);
+}
+
+function startlist() {
+    let executable = (data) => {
+        equipmentList = data;
+        updateEquipmentShowed();
+    }
+    getJson("equipamentos", executable);
+}
+
+function loginState() {
+    const logedCookie = document.cookie.split(";");
+    if (logedCookie != "") {
+        document.getElementById("login-form").style.display = "none";
+        console.log(document.cookie);
+        startlist();
+    } else {
+        document.getElementById("login-form").style.display = "flex";
+        console.log(document.cookie);
+    }
+}
+
+const loginForm = document.getElementById("login-forms");
+
+loginForm.addEventListener("submit", (event) => {
+    event.preventDefault();
+
+    const formData = new FormData(loginForm);
+    let executable = (data) => {
+        console.log(data);
+        loginState();
+    }
+    let header = "login";
+
+
+    try {
+        fetch(route + header, {
+            method: 'POST',
+            body: formData,
+            credentials: 'include'
+        })
+            .then(response => response.json())
+            .then(data => {
+                try {
+                    executable(data);
+                } catch (error) {
+                    alert(`Erro: ${data}`);
+                }
+            });
+    } catch (error) {
+        alert(`Erro: ${error}`);
+    }
+
+});
+
+const logoutButton = document.getElementById("logout-item-button");
+logoutButton.addEventListener("click", () => {
+    logout();
+});
+
+function logout() {
+    let executable = (data) => {
+        console.log(data);
+        loginState();
+    }
+    let header = "logout";
+    try {
+        fetch(route + header, {
+            method: 'GET',
+            credentials: 'include'
+        })
+            .then(response => response.json())
+            .then(data => {
+                try {
+                    executable(data);
+                } catch (error) {
+                    alert(`Erro: ${data}`);
+                }
+            });
+    } catch (error) {
+        alert(`Erro: ${error}`);
+    }
 }
