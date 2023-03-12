@@ -3,6 +3,19 @@ main {
   width: 100%;
 }
 
+.logout-div {
+  float: right;
+}
+
+.logout-item-button {
+  border: none;
+  cursor: pointer;
+  background-color: #5c2932;
+  border-radius: 75%;
+  font-size: 3vw;
+  color: white;
+}
+
 .container {
   max-width: 1000px;
   padding: 10px;

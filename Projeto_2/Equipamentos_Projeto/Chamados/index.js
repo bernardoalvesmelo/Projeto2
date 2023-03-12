@@ -23,8 +23,6 @@ const searchBar = document.getElementById("search");
 
 const createChamadoButton = document.getElementById("create-item-button");
 
-startlist();
-
 createChamadoButton.addEventListener("click", () => {
     startlist();
     if (equipamentos[0] != null) {
@@ -184,7 +182,10 @@ function removeButtonClick(id) {
 
 function getJson(header, executable) {
     try {
-        fetch(route + header)
+        fetch(route + header, {
+            method: 'GET',
+            credentials: 'include'
+        })
             .then(response => response.json())
             .then(data => {
                 try {
@@ -211,7 +212,8 @@ function postJson(header, object, executable) {
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify(object)
+            body: JSON.stringify(object),
+            credentials: 'include'
         })
             .then(response => response.json())
             .then(data => {
@@ -237,4 +239,78 @@ function startlist() {
     }
     getJson("equipamentos", executable);
 
+}
+
+function loginState() {
+    const logedCookie = document.cookie.split(";");
+    if (logedCookie != "") {
+        document.getElementById("login-form").style.display = "none";
+        console.log(document.cookie);
+        startlist();
+    } else {
+        document.getElementById("login-form").style.display = "flex";
+        console.log(document.cookie);
+    }
+}
+
+const loginForm = document.getElementById("login-forms");
+
+loginForm.addEventListener("submit", (event) => {
+    event.preventDefault();
+
+    const formData = new FormData(loginForm);
+    let executable = (data) => {
+        console.log(data);
+        loginState();
+    }
+    let header = "login";
+
+
+    try {
+        fetch(route + header, {
+            method: 'POST',
+            body: formData,
+            credentials: 'include'
+        })
+            .then(response => response.json())
+            .then(data => {
+                try {
+                    executable(data);
+                } catch (error) {
+                    alert(`Erro: ${data}`);
+                }
+            });
+    } catch (error) {
+        alert(`Erro: ${error}`);
+    }
+
+});
+
+const logoutButton = document.getElementById("logout-item-button");
+logoutButton.addEventListener("click", () => {
+    logout();
+});
+
+function logout() {
+    let executable = (data) => {
+        console.log(data);
+        loginState();
+    }
+    let header = "logout";
+    try {
+        fetch(route + header, {
+            method: 'GET',
+            credentials: 'include'
+        })
+            .then(response => response.json())
+            .then(data => {
+                try {
+                    executable(data);
+                } catch (error) {
+                    alert(`Erro: ${data}`);
+                }
+            });
+    } catch (error) {
+        alert(`Erro: ${error}`);
+    }
 }
