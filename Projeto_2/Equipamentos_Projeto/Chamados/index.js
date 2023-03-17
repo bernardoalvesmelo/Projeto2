@@ -242,7 +242,7 @@ function startlist() {
 }
 
 function loginState() {
-    const logedCookie = document.cookie.split(";").filter(n=>n.includes("session"));
+    const logedCookie = document.cookie.split(";").filter(cookieElement=>cookieElement.includes("session"));
     if (logedCookie != "") {
         document.getElementById("login-form").style.display = "none";
         console.log(document.cookie);
