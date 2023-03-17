@@ -313,4 +313,5 @@ function logout() {
     } catch (error) {
         alert(`Erro: ${error}`);
     }
+    window.location.reload();
 }
